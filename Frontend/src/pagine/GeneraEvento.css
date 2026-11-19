@@ -1,0 +1,133 @@
+.pagina-GeneraEvento {
+  min-height: calc(100vh - 60px);
+  padding: 3rem 1rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: #f9fafb;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(22, 101, 52, 0.22), transparent 55%),
+    linear-gradient(135deg, #0b1120 0%, #111827 50%, #0b1220 100%);
+}
+
+.input_GeneraEvento {
+  position: relative;
+  width: 100%;
+  max-width: 750px;
+  box-sizing: border-box;
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(74, 222, 128, 0.12), transparent 50%),
+    linear-gradient(145deg, rgba(31, 41, 55, 0.96), rgba(17, 24, 39, 0.96));
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.input_GeneraEvento::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(134, 239, 172, 0.6), transparent);
+}
+
+.gen-badge {
+  align-self: flex-start;
+  padding: 0.15rem 0.7rem;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: rgba(134, 239, 172, 0.12);
+  color: #86efac;
+  border: 1px solid rgba(134, 239, 172, 0.3);
+}
+
+.gen-title {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.gen-sub {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  color: #94a3b8;
+}
+
+.gen-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.gen-campo label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+/* input normali e input del datepicker */
+.gen-campo input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem 1rem;
+  font-size: 1.3rem;
+  font-family: inherit;
+  color: #fff;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(71, 85, 105, 0.6);
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gen-campo input::placeholder { color: #64748b; }
+
+.gen-campo input:focus {
+  border-color: #86efac;
+  box-shadow: 0 0 0 3px rgba(134, 239, 172, 0.15);
+}
+
+.gen-campo .react-datepicker-wrapper,
+.gen-campo .react-datepicker__input-container {
+  width: 100%;
+}
+
+.gen-btn {
+  margin-top: 0.5rem;
+  padding: 0.85rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: #052e16;
+  background: #86efac;
+  border: 1px solid #86efac;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 0 18px rgba(134, 239, 172, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gen-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(134, 239, 172, 0.45);
+}
+
+.gen-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* il calendario deve stare sopra la card */
+.react-datepicker-popper { z-index: 50; }

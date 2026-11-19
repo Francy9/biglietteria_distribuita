@@ -1,0 +1,39 @@
+.switch-modalita {
+  display: flex;
+  width: fit-content;
+  margin: 0 auto 2rem;
+  padding: 4px;
+  gap: 4px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(71, 85, 105, 0.6);
+  border-radius: 14px;
+}
+
+.switch-opzione {
+  padding: 0.55rem 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: #94a3b8;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.switch-opzione:hover:not(.attiva) {
+  color: #fff;
+  background: rgba(51, 65, 85, 0.5);
+}
+
+.switch-opzione.attiva {
+  color: #052e16;
+  background: #86efac;
+  box-shadow: 0 0 14px rgba(134, 239, 172, 0.35);
+}
+
+.switch-opzione:focus-visible {
+  outline: 2px solid #86efac;
+  outline-offset: 2px;
+}

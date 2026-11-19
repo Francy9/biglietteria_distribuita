@@ -1,0 +1,150 @@
+x-besu: &besu
+  image: hyperledger/besu:latest
+  volumes:
+    - ./besu/networkFiles:/config:ro
+
+services:
+  besu1:
+    <<: *besu
+    command: >
+      --genesis-file=/config/genesis.json
+      --node-private-key-file=/config/keys/0x66c52c60250d7de337a1f11febd1500f6a6d27d8/key
+      --data-path=/opt/besu/data
+      --p2p-host=172.30.0.11
+      --rpc-http-enabled --rpc-http-host=0.0.0.0 --rpc-http-port=8545
+      --rpc-http-api=ETH,NET,QBFT,WEB3
+      --host-allowlist=* --rpc-http-cors-origins=all
+      --min-gas-price=0
+    networks:
+      default:
+        ipv4_address: 172.30.0.11
+
+  besu2:
+    <<: *besu
+    command: >
+      --genesis-file=/config/genesis.json
+      --node-private-key-file=/config/keys/0xd742547331ffc11f035fab4dd0fbd069084dff95/key
+      --data-path=/opt/besu/data
+      --p2p-host=172.30.0.12
+      --bootnodes=${BOOTNODE_ENODE:-enode://0e27ab90f28cea6d4a91e87808c923fa6400c5473243587111cc9e3f4f5d64dbfd30b399929cc718019955de6671ad147244b3273d7e4461d41b25ae3dc429b2@172.30.0.11:30303}
+      --rpc-http-enabled --rpc-http-host=0.0.0.0 --rpc-http-port=8545
+      --rpc-http-api=ETH,NET,QBFT,WEB3
+      --host-allowlist=* --rpc-http-cors-origins=all
+      --min-gas-price=0
+    networks:
+      default:
+        ipv4_address: 172.30.0.12
+
+  besu3:
+    <<: *besu
+    command: >
+      --genesis-file=/config/genesis.json
+      --node-private-key-file=/config/keys/0x87318a404292224b1b34889fe785e7c39c16a5da/key
+      --data-path=/opt/besu/data
+      --p2p-host=172.30.0.13
+      --bootnodes=${BOOTNODE_ENODE:-enode://0e27ab90f28cea6d4a91e87808c923fa6400c5473243587111cc9e3f4f5d64dbfd30b399929cc718019955de6671ad147244b3273d7e4461d41b25ae3dc429b2@172.30.0.11:30303}
+      --rpc-http-enabled --rpc-http-host=0.0.0.0 --rpc-http-port=8545
+      --rpc-http-api=ETH,NET,QBFT,WEB3
+      --host-allowlist=* --rpc-http-cors-origins=all
+      --min-gas-price=0
+    networks:
+      default:
+        ipv4_address: 172.30.0.13
+
+  besu4:
+    <<: *besu
+    command: >
+      --genesis-file=/config/genesis.json
+      --node-private-key-file=/config/keys/0xe98ca2fa5b32fab3ec88ca4a026271f919b9b12b/key
+      --data-path=/opt/besu/data
+      --p2p-host=172.30.0.14
+      --bootnodes=${BOOTNODE_ENODE:-enode://0e27ab90f28cea6d4a91e87808c923fa6400c5473243587111cc9e3f4f5d64dbfd30b399929cc718019955de6671ad147244b3273d7e4461d41b25ae3dc429b2@172.30.0.11:30303}
+      --rpc-http-enabled --rpc-http-host=0.0.0.0 --rpc-http-port=8545
+      --rpc-http-api=ETH,NET,QBFT,WEB3
+      --host-allowlist=* --rpc-http-cors-origins=all
+      --min-gas-price=0
+    networks:
+      default:
+        ipv4_address: 172.30.0.14
+
+
+
+  hardhat:
+    image: node:24
+    working_dir: /app
+    command: sleep infinity
+    volumes:
+      - .:/app
+
+  compile:
+    image: node:24
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: sh -c "npm install && npx hardhat compile"
+
+  mosquitto:
+    image: eclipse-mosquitto:2
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    ports:
+      - "127.0.0.1:1883:1883"
+      - "127.0.0.1:9001:9001"
+
+
+  deployer:
+    build: ./Backend
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      RPC_URLS: http://besu1:8545,http://besu2:8545,http://besu3:8545,http://besu4:8545
+      PRIVATE_KEY: ${PRIVATE_KEY:-0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80}
+    depends_on:
+      compile:
+        condition: service_completed_successfully
+      besu1:
+        condition: service_started
+      besu2:
+        condition: service_started
+      besu3:
+        condition: service_started
+      besu4:
+        condition: service_started
+    command: python Backend/deploy.py
+
+  backend:
+    build: ./Backend
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      RPC_URLS: http://besu1:8545,http://besu2:8545,http://besu3:8545,http://besu4:8545
+      MQTT_HOST: mosquitto
+      PRIVATE_KEY: ${PRIVATE_KEY:-0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80}
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      deployer:
+        condition: service_completed_successfully
+      mosquitto:
+        condition: service_started
+    command: uvicorn main:app --app-dir Backend --host 0.0.0.0 --port 3000 --reload
+    restart: on-failure
+
+  frontend:
+    image: node:24
+    working_dir: /app/Frontend
+    volumes:
+      - .:/app
+    ports:
+      - "127.0.0.1:5173:5173"
+    depends_on:
+      - backend
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5173"
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24

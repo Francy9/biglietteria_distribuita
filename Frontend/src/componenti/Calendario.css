@@ -1,0 +1,298 @@
+.selettore-dataora {
+  position: relative;
+  width: 100%;
+}
+
+.campo-data {
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* ==========================================
+   POPUP
+   ========================================== */
+.popup-dataora {
+  position: absolute;
+  z-index: 1000;
+  top: calc(100% + 8px);
+  left: 0;
+
+  width: 37rem;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+
+  padding: 16px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  color: #f9fafb;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(74, 222, 128, 0.12), transparent 50%),
+    linear-gradient(145deg, rgba(31, 41, 55, 0.99), rgba(17, 24, 39, 0.99));
+    border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+
+
+.titolo-dataora {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  padding: 0 4px 12px;
+  text-align: center;
+}
+
+/* ==========================================
+   REACT-DATEPICKER
+   ========================================== */
+.popup-dataora .react-datepicker {
+  border: none;
+  font-family: inherit;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: transparent;
+  color: #f9fafb;
+}
+
+.popup-dataora .react-datepicker__month-container {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+.popup-dataora .react-datepicker__header {
+  background: transparent;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  padding-top: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.popup-dataora .react-datepicker__current-month {
+  font-family: inherit;
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: #fff;
+  text-align: center;
+  text-transform: capitalize;
+  margin-bottom: 12px;
+}
+
+.popup-dataora .react-datepicker__day-names {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  width: 100% !important;
+  margin: 8px 0 !important;
+}
+
+.popup-dataora .react-datepicker__day-name {
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+.popup-dataora .react-datepicker__month {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+.popup-dataora .react-datepicker__week {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  gap: 4px;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.popup-dataora .react-datepicker__day {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  aspect-ratio: 1;
+  margin: 0 !important;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+  color: #e2e8f0;
+  border: 1px solid transparent;
+  border-radius: 12px !important;
+  transition: background-color 0.15s ease, color 0.15s ease,
+              border-color 0.15s ease;
+}
+
+/* giorni di altri mesi e disabilitati */
+.popup-dataora .react-datepicker__day--outside-month {
+  color: #475569;
+}
+
+.popup-dataora .react-datepicker__day--disabled {
+  color: #475569 !important;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+/* ==========================================
+   FRECCE DI NAVIGAZIONE
+   ========================================== */
+.popup-dataora .react-datepicker__navigation {
+  top: 0.7rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(71, 85, 105, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.popup-dataora .react-datepicker__navigation:hover {
+  background-color: #334155;
+  border-color: rgba(134, 239, 172, 0.5);
+}
+
+.popup-dataora .react-datepicker__navigation--previous { left: 0.5rem; }
+.popup-dataora .react-datepicker__navigation--next     { right: 0.5rem; }
+
+.popup-dataora .react-datepicker__navigation-icon--previous {
+  position: absolute !important;
+  top: 19% !important;
+  left: 47% !important;
+  margin: 0 !important;
+}
+
+.popup-dataora .react-datepicker__navigation-icon--next {
+  position: absolute !important;
+  top: 21% !important;
+  left: 52% !important;
+  margin: 0 !important;
+}
+
+.popup-dataora .react-datepicker__navigation-icon::before {
+  border-color: #cbd5e1 !important;
+  border-width: 2px 2px 0 0 !important;
+  height: 7px !important;
+  width: 7px !important;
+}
+
+.popup-dataora .react-datepicker__navigation:hover
+  .react-datepicker__navigation-icon::before {
+  border-color: #86efac !important;
+}
+
+/* ==========================================
+   OGGI / HOVER / SELEZIONATO
+   ========================================== */
+.popup-dataora .react-datepicker__day--today {
+  font-weight: 800 !important;
+  color: #86efac !important;
+  border-color: rgba(134, 239, 172, 0.5);
+  background: rgba(134, 239, 172, 0.08);
+}
+
+.popup-dataora .react-datepicker__day:hover:not(.react-datepicker__day--disabled) {
+  background-color: rgba(134, 239, 172, 0.18) !important;
+  color: #fff !important;
+  border-color: rgba(134, 239, 172, 0.5);
+}
+
+.popup-dataora .react-datepicker__day--selected,
+.popup-dataora .react-datepicker__day--keyboard-selected {
+  background-color: #86efac !important;
+  color: #052e16 !important;
+  font-weight: 800;
+  border-color: #86efac;
+  box-shadow: 0 0 14px rgba(134, 239, 172, 0.4);
+}
+
+/* ==========================================
+   SCELTA ORARIO
+   ========================================== */
+.intestazione-orari {
+  min-width: 260px;
+}
+
+.intestazione-orari button.bottone-indietro {
+  background: transparent;
+  border: none;
+  color: #86efac;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 8px 4px;
+  transition: color 0.2s ease;
+}
+
+.intestazione-orari button.bottone-indietro:hover {
+  color: #fff;
+}
+
+.data-scelta {
+  color: #94a3b8;
+  font-size: 1.1rem;
+  padding: 0 4px 12px;
+  text-transform: capitalize;
+}
+
+.lista-orari {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(72px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 4px;
+}
+.lista-orari::-webkit-scrollbar { width: 8px; }
+.lista-orari::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); border-radius: 8px; }
+.lista-orari::-webkit-scrollbar-thumb { background: #86efac; border-radius: 8px; }
+
+.lista-orari button.orario-opzione {
+  padding: 10px 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #e2e8f0;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(71, 85, 105, 0.6);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease,
+              border-color 0.15s ease, transform 0.15s ease;
+}
+
+.lista-orari button.orario-opzione:hover {
+  background: rgba(134, 239, 172, 0.15);
+  border-color: rgba(134, 239, 172, 0.5);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.lista-orari button.orario-selezionato,
+.lista-orari button.orario-opzione.orario-selezionato {
+  background: #86efac;
+  color: #052e16;
+  border-color: #86efac;
+  box-shadow: 0 0 14px rgba(134, 239, 172, 0.4);
+}

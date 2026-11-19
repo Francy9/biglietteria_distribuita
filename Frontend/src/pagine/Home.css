@@ -1,0 +1,112 @@
+.pagina-home {
+  min-height: 100vh;
+  padding: 4rem 1rem;
+  box-sizing: border-box;
+  color: #f9fafb;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(22, 101, 52, 0.22), transparent 55%),
+    linear-gradient(135deg, #0b1120 0%, #111827 50%, #0b1220 100%);
+}
+
+.home-hero {
+  max-width: 700px;
+  margin: 0 auto 3.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.home-badge {
+  padding: 0.15rem 0.7rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: rgba(134, 239, 172, 0.12);
+  color: #86efac;
+  border: 1px solid rgba(134, 239, 172, 0.3);
+}
+
+.home-title {
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.home-sub {
+  margin: 0;
+  color: #94a3b8;
+}
+
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.home-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 220px;
+  padding: 1.75rem;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: #fff;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(74, 222, 128, 0.12), transparent 50%),
+    linear-gradient(145deg, rgba(31, 41, 55, 0.96), rgba(17, 24, 39, 0.96));
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(134, 239, 172, 0.6), transparent);
+}
+
+.home-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(134, 239, 172, 0.5);
+  box-shadow: 0 16px 40px rgba(134, 239, 172, 0.12);
+}
+
+.home-card:focus-visible {
+  outline: 2px solid #86efac;
+  outline-offset: 3px;
+}
+
+.home-card h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.home-card p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.home-card-cta {
+  margin-top: auto;
+  font-weight: 700;
+  color: #86efac;
+}

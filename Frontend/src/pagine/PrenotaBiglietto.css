@@ -1,0 +1,264 @@
+/* Contenitore principale dell'header */
+.pagina-prenotazione {
+    min-height: 100vh;
+    padding: 4rem 0;
+    color: #f9fafb;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 0%,
+            rgba(22, 101, 52, 0.22),
+            transparent 55%
+        ),
+        linear-gradient(
+            135deg,
+            #0b1120 0%,
+            #111827 50%,
+            #0b1220 100%
+        );
+}
+
+
+.event-header {
+  position: relative;
+  overflow: hidden;
+  width: 95%;
+  max-width: 1100px;
+  margin: 0 auto 2rem;
+  padding: 1.5rem 1.75rem;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+
+  background:
+    radial-gradient(circle at 0% 0%, rgba(74, 222, 128, 0.12), transparent 50%),
+    linear-gradient(145deg, rgba(31, 41, 55, 0.96), rgba(17, 24, 39, 0.96));
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+/* linea verde sottile in alto */
+.event-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(134, 239, 172, 0.6), transparent);
+}
+
+.event-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  min-width: 0;
+
+}
+
+.back-button {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  padding: 0;             /* <-- toglie il padding di default del button */
+  box-sizing: border-box; 
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;        /* <-- evita lo spazio extra sotto l'svg */
+
+  background: rgba(30, 41, 59, 0.8);
+  color: #cbd5e1;
+  border: 1px solid rgba(71, 85, 105, 0.6);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-button svg {
+  display: block;         /* <-- l'svg non è più inline */
+  flex-shrink: 0;
+} 
+
+.back-button:hover {
+  background: #334155;
+  color: #86efac;
+  border-color: rgba(134, 239, 172, 0.5);
+  transform: translateX(-2px);
+}
+.back-button:focus-visible {
+  outline: 2px solid #86efac;
+  outline-offset: 2px;
+}
+
+/* Info evento */
+.event-info {
+  flex: 1;
+  min-width: 0;            /* permette al titolo di troncarsi */
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-left: 1.25rem;
+  border-left: 1px solid rgba(148, 163, 184, 0.2); /* divisore */
+}
+
+
+.event-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.category-badge {
+  padding: 0.15rem 0.7rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: rgba(134, 239, 172, 0.12);
+  color: #86efac;
+  border: 1px solid rgba(134, 239, 172, 0.3);
+
+}
+
+.event-date {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+.event-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Box posti a destra */
+.event-seats {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: rgba(134, 239, 172, 0.08);
+  border: 1px solid rgba(134, 239, 172, 0.25);
+  border-radius: 14px;
+}
+
+.seats-number {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #86efac;
+  line-height: 1;
+}
+
+.seats-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  margin-top: 0.2rem;
+}
+
+.azioni-prenotazione {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.azioni-prenotazione button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+
+  min-width: 145px;
+  min-height: 120px;
+  padding: 1.2rem 1rem;
+
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+
+  border: 1px solid transparent;
+  border-radius: 16px;
+  cursor: pointer;
+
+  transition: transform 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.azioni-prenotazione button:hover {
+  transform: translateY(-3px);
+}
+
+.azioni-prenotazione button:focus-visible {
+  outline: 3px solid #64748b;
+  outline-offset: 3px;
+}
+
+.azioni-prenotazione button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+
+.btn-prenota {
+  color: #14532d;
+  background: #86efac;
+  border-color: #86efac !important;
+  box-shadow: 0 4px 12px #86efac55;
+}
+
+.btn-prenota:hover {
+  box-shadow: 0 8px 20px #86efac88;
+}
+
+.btn-valida {
+  color: #14532d;
+  background: #86efac;
+  border-color: #86efac !important;
+  box-shadow: 0 4px 12px #86efac55;
+}
+
+.btn-valida:hover {
+  box-shadow: 0 8px 20px #86efac88;
+}
+
+.btn-cancella {
+  color: #7f1d1d;
+  background: #fca5a5;
+  border-color: #fca5a5 !important;
+  box-shadow: 0 4px 12px #f8717155;
+}
+
+.btn-cancella:hover {
+  background: #f87171;
+  box-shadow: 0 8px 20px #f8717188;
+}
+
+.btn-Intestazione {
+  color: #1e3a8a;
+  background: #bfdbfe;
+  border-color: #bfdbfe !important;
+  box-shadow: 0 4px 12px #60a5fa44;
+}
+
+.btn-Intestazione:hover {
+  box-shadow: 0 8px 20px #60a5fa77;
+}
